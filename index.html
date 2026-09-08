@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo Broadhurst - Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F6F3;
+    --paper-2:#EFEDE7;
+    --ink:#14161A;
+    --ink-soft:#4A4D52;
+    --rule:#D8D5CD;
+    --rule-strong:#B9B6AC;
+    --orange:#C4501C;
+    --steel:#3D5A6C;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 32px;
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+  }
+
+  /* ---------- Header / nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(247,246,243,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:16px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-name{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:0.88rem;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    transition:color .15s;
+  }
+  .nav-links a:hover{color:var(--orange);}
+  @media (max-width:640px){
+    .nav-links{gap:16px; font-size:0.78rem;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--rule);
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+  .hero-photo{
+    margin:6px 0 0;
+    border:1px solid var(--rule);
+    background:var(--paper-2);
+  }
+  .hero-photo img{
+    width:100%;
+    display:block;
+  }
+  .hero-photo figcaption{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    padding:8px 10px;
+    border-top:1px solid var(--rule);
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    color:var(--orange);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-eyebrow::before{
+    content:"";
+    width:28px;
+    height:1px;
+    background:var(--orange);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5.5vw, 4rem);
+    line-height:1.05;
+    max-width:11.5em;
+  }
+  .hero .role{
+    margin-top:22px;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    max-width:640px;
+  }
+  .hero-meta{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(2,auto);
+    gap:28px 36px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+  }
+  .hero-meta div span{
+    display:block;
+    color:var(--ink);
+    font-size:0.95rem;
+    margin-top:4px;
+  }
+  @media (max-width:760px){
+    .hero-meta{grid-template-columns:repeat(2,auto);}
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section.block{
+    padding:80px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:48px;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.8rem;
+    color:var(--rule-strong);
+  }
+  .section-head h2{
+    font-size:1.8rem;
+  }
+
+  /* ---------- Project drawing-sheet block ---------- */
+  .project{
+    padding:56px 0;
+    border-top:1px solid var(--rule);
+  }
+  .project:first-of-type{border-top:none; padding-top:0;}
+  .titleblock{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:24px;
+    align-items:start;
+    margin-bottom:28px;
+    padding-bottom:20px;
+    border-bottom:2px solid var(--ink);
+  }
+  .titleblock h3{
+    font-size:1.55rem;
+  }
+  .titleblock .sub{
+    color:var(--ink-soft);
+    margin-top:6px;
+    font-size:0.98rem;
+  }
+  .drawing-no{
+    text-align:right;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    line-height:1.5;
+    white-space:nowrap;
+  }
+  .drawing-no strong{
+    display:block;
+    color:var(--ink);
+    font-size:0.85rem;
+  }
+
+  .project-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:40px;
+  }
+  @media (max-width:860px){
+    .project-grid{grid-template-columns:1fr;}
+  }
+
+  .project-body p{margin:0 0 16px;}
+  .project-body p:last-child{margin-bottom:0;}
+
+  .specs{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.82rem;
+  }
+  .specs dt{
+    color:var(--ink-soft);
+    margin-top:14px;
+  }
+  .specs dt:first-child{margin-top:0;}
+  .specs dd{
+    margin:2px 0 0;
+    color:var(--ink);
+    font-size:0.98rem;
+    font-family:'Inter',sans-serif;
+  }
+
+  .stat-row{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    margin:20px 0 8px;
+    padding:18px 0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .stat{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .stat .num{
+    font-size:1.5rem;
+    color:var(--orange);
+    display:block;
+    line-height:1.1;
+  }
+  .stat .lbl{
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    text-transform:none;
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:24px;
+  }
+  .gallery.g2{grid-template-columns:1fr 1fr;}
+  .gallery.g3{grid-template-columns:1fr 1fr 1fr;}
+  @media (max-width:640px){
+    .gallery.g2, .gallery.g3{grid-template-columns:1fr;}
+  }
+  .gallery figure{
+    margin:0;
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+  }
+  .gallery img{
+    width:100%;
+    display:block;
+  }
+  .gallery figcaption{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    padding:8px 10px;
+    border-top:1px solid var(--rule);
+  }
+
+  .full-img{
+    margin:24px 0 0;
+    border:1px solid var(--rule);
+    background:var(--paper-2);
+  }
+  .full-img img{width:100%; display:block;}
+  .full-img figcaption{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    padding:8px 10px;
+    border-top:1px solid var(--rule);
+  }
+
+  /* decision matrix table */
+  table.matrix{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:0.86rem;
+  }
+  table.matrix caption{
+    text-align:left;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  table.matrix th, table.matrix td{
+    text-align:left;
+    padding:9px 10px;
+    border-bottom:1px solid var(--rule);
+  }
+  table.matrix th{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--ink);
+  }
+  table.matrix td.num, table.matrix th.num{text-align:center; font-family:'IBM Plex Mono',monospace;}
+  table.matrix tr.total td{
+    font-weight:600;
+    border-top:2px solid var(--ink);
+    border-bottom:none;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  table.matrix tr.total td.winner{color:var(--orange);}
+
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    color:var(--ink-soft);
+    border:1px solid var(--rule-strong);
+    padding:4px 9px;
+    border-radius:2px;
+  }
+
+  video.demo{
+    width:100%;
+    display:block;
+    border:1px solid var(--rule);
+    background:#000;
+  }
+
+  /* ---------- About / skills ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+  .skill-group{margin-bottom:26px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-group h4{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    color:var(--orange);
+    font-weight:500;
+    margin-bottom:10px;
+  }
+  .skill-group p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+
+  .timeline{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .timeline li{
+    padding:14px 0;
+    border-top:1px solid var(--rule);
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:16px;
+  }
+  .timeline li:first-child{border-top:none;}
+  .timeline .when{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.75rem;
+    color:var(--ink-soft);
+    padding-top:2px;
+  }
+  .timeline .what strong{display:block; font-size:0.98rem;}
+  .timeline .what span{color:var(--ink-soft); font-size:0.9rem;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:56px 0 64px;
+  }
+  footer .foot-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  footer h2{font-size:1.7rem; max-width:9em;}
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.9rem;
+  }
+  .contact-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--rule-strong);
+    padding-bottom:1px;
+  }
+  .contact-links a:hover{border-color:var(--orange); color:var(--orange);}
+  .foot-note{
+    margin-top:48px;
+    padding-top:20px;
+    border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--rule-strong);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="nav-name">Leo Broadhurst</div>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#competition">Competition</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow mono">MECHANICAL &amp; SPACE ENGINEERING</div>
+        <h1>Aspiring Motorsport Engineer</h1>
+        <p class="role">Third-year Mechanical and Space Engineering student at the University of Sydney. I work across chassis design, aerodynamics, control systems, and manufacturing, taking projects from first-principles analysis through CAD and simulation into the workshop.</p>
+        <div class="hero-meta">
+          <div>WAM<span>88.25 (HD)</span></div>
+          <div>Status<span>Dalyell Scholar</span></div>
+          <div>Based in<span>Sydney, AU</span></div>
+        </div>
+      </div>
+      <figure class="hero-photo">
+        <img src="assets/competition-1.jpg" alt="Leo pushing the Sydney Motorsport FSAE car in the paddock at competition">
+        <figcaption>Competition paddock, Melbourne 2025</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected projects</h2>
+      <span class="section-num mono">01 - 05</span>
+    </div>
+
+    <!-- PROJECT 1: FSAE Chassis FEA -->
+    <div class="project">
+      <div class="titleblock">
+        <div>
+          <h3>Chassis Structural Analysis, Sydney Motorsport FSAE</h3>
+          <div class="sub">Beam-element FEA of the SM chassis under suspension loading</div>
+        </div>
+        <div class="drawing-no">
+          <strong>SM27 CHASSIS</strong>
+          SENIOR CHASSIS ENGINEER<br>
+          ANSYS 2026 R1 · STATIC STRUCTURAL
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <p>As Senior Chassis Engineer, I built and ran a static structural FEA model of the chassis as a beam-element line-body assembly, applying remote forces and displacements at the suspension hardpoints to represent cornering, braking, and bump loads. The model outputs total deformation, axial force, torsional moment, and shear force across every member, letting us find the highest-loaded nodes before a single tube is cut.</p>
+          <p>This kind of analysis directly informs the trade study I ran for the SM27 Preliminary Design Review (below), where the same load-case thinking scales from a full spaceframe down to individual member sizing.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="num">2313 N</span><span class="lbl">peak axial force, upper LHS member</span></div>
+            <div class="stat"><span class="num">70.5 mm</span><span class="lbl">max total deformation under load</span></div>
+            <div class="stat"><span class="num">1 s</span><span class="lbl">quasi-static load step</span></div>
+          </div>
+        </div>
+        <dl class="specs">
+          <dt>Tool</dt><dd>Ansys Mechanical (Static Structural), line-body beam elements</dd>
+          <dt>Inputs</dt><dd>Remote forces &amp; displacements at suspension pickups, fixed support at mounts</dd>
+          <dt>Outputs</dt><dd>Total deformation, axial force, torsional moment, shear force</dd>
+          <dt>Role</dt><dd>Model setup, load case definition, results interpretation</dd>
+        </dl>
+      </div>
+
+      <div class="gallery g3">
+        <figure><img src="assets/fea-deformation.jpg" alt="Total deformation contour on chassis beam model"><figcaption>Total deformation, max 70.5 mm</figcaption></figure>
+        <figure><img src="assets/fea-axial-force.jpg" alt="Axial force distribution across chassis members"><figcaption>Axial force, full chassis, max 2313 N</figcaption></figure>
+        <figure><img src="assets/fea-axial-zoom.jpg" alt="Close-up axial force at front bulkhead"><figcaption>Axial force, front bulkhead detail</figcaption></figure>
+      </div>
+
+      <div class="full-img">
+        <video class="demo" controls preload="metadata">
+          <source src="assets/25A_sims.mp4" type="video/mp4">
+        </video>
+        <figcaption>Full load-case animation across the chassis, deformation, axial force, torsional moment and shear force sweeps</figcaption>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: SM27 PDR -->
+    <div class="project">
+      <div class="titleblock">
+        <div>
+          <h3>SM27 Chassis Concept Trade Study</h3>
+          <div class="sub">Preliminary Design Report: monocoque vs. spaceframe vs. hybrid down-selection</div>
+        </div>
+        <div class="drawing-no">
+          <strong>SM27 PDR</strong>
+          CHASSIS SUBSECTION<br>
+          FEBRUARY 2026
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <p>I contributed to the chassis subsection's Preliminary Design Report evaluating three candidate architectures for the 2027 car: a carbon-fibre monocoque, a steel tube spaceframe, and a monocoque-spaceframe hybrid. The report worked through geometric and structural rules compliance, packaging of the accumulator and driver, load-case analysis (static, longitudinal, lateral, aerodynamic) for each architecture's failure modes, and a full manufacturing feasibility and cost assessment against a $13,000 AUD budget.</p>
+          <p>The down-selection came down to a weighted decision matrix across eight criteria, with SES/rules compliance risk and schedule feasibility weighted heaviest, given the team currently holds no SES-compliant composite panels. That risk profile, more than raw stiffness-to-weight potential, is what tipped the recommendation toward a tube chassis for SM27.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="num">3300 Nm/deg</span><span class="lbl">target torsional stiffness</span></div>
+            <div class="stat"><span class="num">$13k AUD</span><span class="lbl">chassis manufacturing budget</span></div>
+            <div class="stat"><span class="num">8</span><span class="lbl">weighted evaluation criteria</span></div>
+          </div>
+        </div>
+        <dl class="specs">
+          <dt>Concepts compared</dt><dd>Carbon monocoque · steel tube spaceframe · hybrid</dd>
+          <dt>Load cases</dt><dd>Static, longitudinal, lateral (torsion), aerodynamic</dd>
+          <dt>Constraints</dt><dd>2026 FSAE ruleset (Section F), $13,000 budget, in-house tooling</dd>
+          <dt>Method</dt><dd>Weighted 1–5 decision matrix across 8 criteria</dd>
+        </dl>
+      </div>
+
+      <table class="matrix">
+        <caption>Decision matrix, weighted score out of 5 (higher is better)</caption>
+        <thead>
+          <tr>
+            <th>Criterion</th><th class="num">Weight</th><th class="num">Tube</th><th class="num">Hybrid</th><th class="num">Monocoque</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mass potential</td><td class="num">0.05</td><td class="num">2</td><td class="num">3</td><td class="num">5</td></tr>
+          <tr><td>Torsional stiffness potential</td><td class="num">0.05</td><td class="num">2</td><td class="num">4</td><td class="num">5</td></tr>
+          <tr><td>Packaging &amp; aero freedom</td><td class="num">0.12</td><td class="num">5</td><td class="num">3</td><td class="num">2</td></tr>
+          <tr><td>Manufacturability &amp; team capability</td><td class="num">0.12</td><td class="num">4</td><td class="num">3</td><td class="num">2</td></tr>
+          <tr><td>Schedule feasibility</td><td class="num">0.16</td><td class="num">4</td><td class="num">2</td><td class="num">3</td></tr>
+          <tr><td>Cost feasibility</td><td class="num">0.18</td><td class="num">5</td><td class="num">3</td><td class="num">2</td></tr>
+          <tr><td>Rules / SES compliance risk</td><td class="num">0.22</td><td class="num">4</td><td class="num">3</td><td class="num">1</td></tr>
+          <tr><td>Serviceability &amp; iteration</td><td class="num">0.10</td><td class="num">5</td><td class="num">4</td><td class="num">2</td></tr>
+          <tr class="total"><td>Weighted total</td><td class="num">1.00</td><td class="num winner">4.20</td><td class="num">2.99</td><td class="num">2.24</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tag-row">
+        <span class="tag">Rules compliance (F.3, F.5, F.7)</span>
+        <span class="tag">SES evidence pathway</span>
+        <span class="tag">Cost &amp; schedule modelling</span>
+        <span class="tag">Manufacturing feasibility</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: Front wing CFD -->
+    <div class="project">
+      <div class="titleblock">
+        <div>
+          <h3>Front Wing Design &amp; CFD</h3>
+          <div class="sub">Self-taught aerodynamics: CAD design and Ansys Fluent simulation</div>
+        </div>
+        <div class="drawing-no">
+          <strong>DYNAMICS INDUCTION</strong>
+          AERODYNAMICS TASK<br>
+          SEMESTER 1, 2025
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <p>Starting from zero CFD experience, I taught myself SolidWorks aerofoil surfacing and Ansys Fluent meshing and solving in under two weeks for a Sydney Motorsport aero induction task. After reproducing the provided sample front wing's results, I designed my own three-element wing from scratch, inspired by 2018-era F2 front wings: a NACA 6412 mainplane for a flatter, nosecone-friendly profile, and two S1223 racing-foil flap elements at 8° and 23° angle of attack, plus turning vanes and endplate "scoops" to generate controlled counter-rotating vortices.</p>
+          <p>The reference wing simulation converged cleanly; my own design's volume mesh (quality 0.07) meant the solution never fully converged past ~50 iterations, so I report results from that early-converging window and treat them as indicative rather than final. The vortex behaviour from the turning vanes was validated qualitatively even where the force values weren't.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="num">44.6</span><span class="lbl">drag coefficient, reference wing</span></div>
+            <div class="stat"><span class="num">186 N</span><span class="lbl">downforce, reference wing</span></div>
+            <div class="stat"><span class="num">27.3 N</span><span class="lbl">drag, own design (twice the span)</span></div>
+          </div>
+        </div>
+        <dl class="specs">
+          <dt>CAD</dt><dd>SolidWorks, 3-element wing, NACA 6412 + S1223 aerofoils</dd>
+          <dt>CFD</dt><dd>Ansys Fluent, k-omega turbulence model</dd>
+          <dt>Features</dt><dd>Turning vanes, endplate scoops, counter-rotating vortex generation</dd>
+          <dt>Timeframe</dt><dd>Self-taught CFD pipeline in under 2 weeks</dd>
+        </dl>
+      </div>
+
+      <div class="gallery g2">
+        <figure><img src="assets/wing-cad-iso.jpg" alt="Isometric SolidWorks render of the designed front wing"><figcaption>Own design, isometric, SolidWorks</figcaption></figure>
+        <figure><img src="assets/wing-cad-front.jpg" alt="Front view of the designed front wing"><figcaption>Front view, mainplane, flaps, endplates</figcaption></figure>
+      </div>
+      <div class="gallery g3" style="margin-top:12px;">
+        <figure><img src="assets/wing-mesh-1.jpg" alt="Side-on view of the CFD volume mesh"><figcaption>Volume mesh, side-on section</figcaption></figure>
+        <figure><img src="assets/wing-mesh-2.jpg" alt="Close-up surface mesh around the front wing"><figcaption>Surface mesh detail, wing elements</figcaption></figure>
+        <figure><img src="assets/wing-mesh-3.jpg" alt="Close-up mesh around the endplate and flaps"><figcaption>Mesh refinement at endplate junction</figcaption></figure>
+      </div>
+      <div class="gallery g2" style="margin-top:12px;">
+        <figure><img src="assets/wing-cfd-1.jpg" alt="Streamline plot showing vortex from turning vane" style="background:#000;"><figcaption>Streamlines, turning-vane vortex generation</figcaption></figure>
+        <figure><img src="assets/wing-cfd-2.jpg" alt="Streamline plot over the endplate scoop" style="background:#000;"><figcaption>Airflow over the endplate scoop</figcaption></figure>
+      </div>
+      <div class="gallery g2" style="margin-top:12px;">
+        <figure><img src="assets/wing-cfd-3.jpg" alt="Counter-rotating vortex pair visualisation" style="background:#000;"><figcaption>Counter-rotating vortex pair, rear view</figcaption></figure>
+        <figure><img src="assets/wing-cfd-4.jpg" alt="Velocity magnitude contour over the flap surface" style="background:#000;"><figcaption>Velocity magnitude over flap surface</figcaption></figure>
+      </div>
+    </div>
+
+    <!-- PROJECT 4: FPE Cryocooler control -->
+    <div class="project">
+      <div class="titleblock">
+        <div>
+          <h3>Cryocooler Control System Design</h3>
+          <div class="sub">Gain-scheduled state-space control for a Floating Piston Expander</div>
+        </div>
+        <div class="drawing-no">
+          <strong>AMME3500</strong>
+          CONTROL SYSTEMS DESIGN<br>
+          MAY 2026 · SCORE: 94%
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <p>For an open-ended control systems design project, I chose to design a controller for a Floating Piston Expander (FPE), the warm-end throttle of a Collins-cycle cryocooler intended for zero-boil-off cooling of cryogenic propellants on long-duration space missions. Rather than a simpler system like car suspension, I picked the FPE because it was an active university research problem with a real path to a thesis.</p>
+          <p>I linearised the nonlinear piston dynamics around four reservoir-pressure operating points and designed a gain-scheduled state feedback controller with integral action on position error, using pole placement to meet settling-time and overshoot targets at each segment. Because the full state isn't measurable, I paired this with a Luenberger observer for state estimation, then validated the closed-loop system in Simulink under nominal conditions, a helium-leak disturbance, and ±60 μm sensor noise.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="num">4</span><span class="lbl">gain-scheduled operating segments</span></div>
+            <div class="stat"><span class="num">880.8 rad/s</span><span class="lbl">fastest unstable open-loop pole</span></div>
+            <div class="stat"><span class="num">±60 μm</span><span class="lbl">sensor noise validated against</span></div>
+          </div>
+        </div>
+        <dl class="specs">
+          <dt>Method</dt><dd>Pole placement, gain scheduling, Luenberger observer design</dd>
+          <dt>Tools</dt><dd>MATLAB, Simulink</dd>
+          <dt>Validation</dt><dd>Nominal, disturbance (He leak), and sensor-noise scenarios</dd>
+          <dt>Result</dt><dd>Segments C/D met design criteria; segment A limited by fast unstable pole</dd>
+        </dl>
+      </div>
+
+      <div class="full-img">
+        <img src="assets/fpe-schematic.jpg" alt="Floating Piston Expander cryocooler system schematic, showing gas reservoirs, throttle valves, and warm-end/cold-end volumes" style="max-width:380px; margin:0 auto; display:block;">
+        <figcaption style="text-align:center;">FPE system schematic, four-reservoir warm-end throttle within the Collins-cycle cryocooler</figcaption>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag">Gain-scheduled state feedback</span>
+        <span class="tag">Pole placement</span>
+        <span class="tag">Luenberger observer</span>
+        <span class="tag">Nonlinear to linearised dynamics</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 5: Pneumatic engine -->
+    <div class="project">
+      <div class="titleblock">
+        <div>
+          <h3>Compressed Air Engine: Design &amp; Manufacture</h3>
+          <div class="sub">Dual-acting pneumatic reciprocating engine, from concept to finished assembly</div>
+        </div>
+        <div class="drawing-no">
+          <strong>MECH1400 FINAL REPORT</strong>
+          SEMESTER 2, 2024<br>
+          SCHOOL OF AMME
+        </div>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-body">
+          <p>First-year design-and-build project: research, design, and manufacture a small compressed-air reciprocating engine from raw stock in 24 workshop hours, running on 50 psi shop air. As a group of four, we designed a dual-acting, multi-cylinder engine that uses a "dog bone" sliding valve, a double-headed piston rather than the flat sliding plate most teams use, to route high- and low-pressure air between two synchronised flywheels.</p>
+          <p>I worked through the engineering analysis behind the design: thick-walled pressure vessel theory (Lamé's equation) to size the cylinder against hoop stress, Grashoff's formula for minimum piston head thickness, and a full dynamic model of piston displacement, velocity, and acceleration through the crank cycle to size the flywheel and predict cylinder pressure over one revolution. All parts were then detailed to AS1100 drawing standard and machined on lathe, mill, and drill press.</p>
+          <div class="stat-row">
+            <div class="stat"><span class="num">446 kPa</span><span class="lbl">hoop stress, thick-wall cylinder analysis</span></div>
+            <div class="stat"><span class="num">70 mm</span><span class="lbl">piston stroke length</span></div>
+            <div class="stat"><span class="num">248,000 mm/s²</span><span class="lbl">max piston acceleration (TDC/BDC)</span></div>
+          </div>
+        </div>
+        <dl class="specs">
+          <dt>Materials</dt><dd>1020 bright mild steel (cylinders, structure), C385 brass (piston, valve)</dd>
+          <dt>Analysis</dt><dd>Lamé's thick-wall equation, Grashoff's formula, crank-slider dynamics</dd>
+          <dt>Manufacture</dt><dd>Lathe, mill, drill press: turning, facing, boring, reaming</dd>
+          <dt>Standard</dt><dd>Full detail &amp; assembly drawings to AS1100</dd>
+        </dl>
+      </div>
+
+      <div class="gallery g2">
+        <figure><div style="height:380px; overflow:hidden;"><img src="assets/pneumatic-finished.jpg" alt="Finished compressed air engine, dual flywheel and cylinder assembly" style="height:100%; width:100%; object-fit:cover; display:block;"></div><figcaption>Finished engine, dual flywheel and cylinder assembly</figcaption></figure>
+        <figure><div style="height:380px; overflow:hidden; background:#fff; display:flex; align-items:center;"><img src="assets/pneumatic-assembly-drawing.jpg" alt="AS1100 assembly drawing of the pneumatic engine" style="width:100%; display:block;"></div><figcaption>Full assembly drawing, AS1100 standard</figcaption></figure>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag">Thick-wall pressure vessel analysis</span>
+        <span class="tag">Crank-slider dynamics</span>
+        <span class="tag">Lathe &amp; mill machining</span>
+        <span class="tag">AS1100 drawing standard</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="block" id="competition">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>At competition</h2>
+      <span class="section-num mono">MELBOURNE 2025</span>
+    </div>
+    <p style="max-width:640px; color:var(--ink-soft); margin-bottom:32px;">One of thirty team members to attend the 2025 Australasian FSAE competition in Melbourne. On-site, I worked on mechanical aspects of the car, assisting with assembly, fixes, and general preparation for scrutineering alongside the rest of the mechanical crew.</p>
+    <div class="gallery g2">
+      <figure><img src="assets/workshop-1.jpg" alt="Fitting a mount bracket in the paddock at competition"><figcaption>Fitting a mount bracket, competition paddock</figcaption></figure>
+      <figure><img src="assets/workshop-2.jpg" alt="Team members assembling the car at competition"><figcaption>Final assembly, chassis and roll hoop</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>About &amp; capability</h2>
+      <span class="section-num mono">06</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <div class="skill-group">
+          <h4>DESIGN &amp; ANALYSIS</h4>
+          <p>SolidWorks CAD, FEA (SolidWorks Simulation &amp; Ansys Mechanical), CFD (Ansys Fluent), MATLAB &amp; Simulink, control system design, Python (numerical solvers, simulation, ML), R.</p>
+        </div>
+        <div class="skill-group">
+          <h4>MANUFACTURING</h4>
+          <p>Lathe, mill, drill press; carbon fibre layup, mould-making, and composite manufacturing; precision machining to tight tolerance.</p>
+        </div>
+        <div class="skill-group">
+          <h4>EDUCATION</h4>
+          <p>Bachelor of Engineering Honours (Mechanical Engineering with Space), University of Sydney, 3rd year, 88.25 WAM (High Distinction). Dalyell Scholar, Dean's List 2024 &amp; 2025.</p>
+        </div>
+      </div>
+      <div>
+        <h4 class="mono" style="font-size:0.78rem; color:var(--orange); margin-bottom:10px;">CURRENT &amp; RECENT ROLES</h4>
+        <ul class="timeline">
+          <li>
+            <div class="when mono">2025</div>
+            <div class="what"><strong>Senior Chassis Engineer</strong><span>Sydney Motorsport FSAE Team</span></div>
+          </li>
+          <li>
+            <div class="when mono">2026</div>
+            <div class="what"><strong>Casual Technical Officer</strong><span>The University of Sydney, lathe &amp; drilling demonstration, machining support</span></div>
+          </li>
+          <li>
+            <div class="when mono">2024</div>
+            <div class="what"><strong>Session Leader &amp; Academic Tutor</strong><span>HSC Coworks, Extension Mathematics, Physics, Economics</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-inner">
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:leobroadhurst@gmail.com">leobroadhurst@gmail.com</a>
+        <a href="tel:+61403337099">+61 403 337 099</a>
+        <a href="https://www.linkedin.com/in/leo-broadhurst/" target="_blank" rel="noopener">linkedin.com/in/leo-broadhurst</a>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>Leo Broadhurst, Mechanical &amp; Space Engineering, University of Sydney</span>
+      <span>Sydney, NSW</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
